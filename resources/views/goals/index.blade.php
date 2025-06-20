@@ -51,7 +51,7 @@
                             <th class="px-4 py-3 text-right">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="text-gray-200 divide-y divide-gray-700">
+                    <tbody class="text-gray-200 divide-y divide-gray-700 text-sm font-semibold">
                         @forelse($goals as $goal)
                             <tr>
                                 <td class="px-4 py-3">{{ $goal->title }}</td>
@@ -97,7 +97,7 @@
 
         {{-- Column Chart --}}
         <div class="bg-gray-800 rounded-lg p-4 shadow">
-            <h2 class="text-xl font-bold text-white mb-4">Progress Overview</h2>
+            <h2 class="text-xl font-bold text-white mb-8">Progress Overview</h2>
             <div id="goals-chart" class="h-80"></div>
             <div id="monthly-goals-line-chart" class="h-96"></div>
         </div>
