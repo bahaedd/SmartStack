@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Goal;
+use Carbon\Carbon;
 
 class GoalController extends Controller
 {
@@ -13,7 +14,38 @@ class GoalController extends Controller
     public function index()
     {
         $goals = Goal::latest()->paginate(10);
-        return view('goals.index', compact('goals'));
+
+        // Group completed goals by month
+        $completed = Goal::where('completed', true)
+            ->whereNotNull('due_date')
+            ->get()
+            ->groupBy(fn($goal) => Carbon::parse($goal->due_date)->format('Y-m'))
+            ->map(fn($group) => $group->count());
+
+        // Group pending goals by month
+        $pending = Goal::where('completed', false)
+            ->whereNotNull('due_date')
+            ->get()
+            ->groupBy(fn($goal) => Carbon::parse($goal->due_date)->format('Y-m'))
+            ->map(fn($group) => $group->count());
+
+        // Generate list of last 12 months
+        $allMonths = collect();
+        $start = now()->subMonths(11)->startOfMonth();
+        for ($i = 0; $i < 12; $i++) {
+            $month = $start->copy()->addMonths($i)->format('Y-m');
+            $allMonths->push($month);
+        }
+
+        // Format for ApexCharts
+        $completedData = $allMonths->map(fn($month) => ['x' => $month, 'y' => $completed->get($month, 0)]);
+        $pendingData = $allMonths->map(fn($month) => ['x' => $month, 'y' => $pending->get($month, 0)]);
+
+        return view('goals.index', [
+            'goals' => $goals,
+            'completedData' => $completedData,
+            'pendingData' => $pendingData,
+        ]);
     }
 
     /**

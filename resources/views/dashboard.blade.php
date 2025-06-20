@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="mb-6">
+    <div class="mb-6 mt-6">
         <h1 class="text-3xl font-bold text-white mb-2">Welcome to SmartStack</h1>
         <p class="text-gray-400">Your personal development tools hub — pick an app from the sidebar to get started.</p>
     </div>
