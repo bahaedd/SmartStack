@@ -96,11 +96,13 @@
         </div>
 
         {{-- Column Chart --}}
-        <div class="bg-gray-800 rounded-lg p-4 shadow">
-            <h2 class="text-xl font-bold text-white mb-8">Progress Overview</h2>
-            <div id="goals-chart" class="h-80"></div>
-            <div id="monthly-goals-line-chart" class="h-96"></div>
+        <div class="">
+            {{-- <h2 class="text-xl font-bold text-white mb-8">Progress Overview</h2> --}}
+            <div id="goals-chart" class="bg-gray-800 rounded-lg p-4 shadow h-80"></div>
+            <div id="monthly-goals-line-chart" class="h-96 bg-gray-800 rounded-lg p-4 shadow mt-3"></div>
+            <div id="donut-chart" class="w-full h-80 bg-gray-800 rounded-lg p-4 shadow mt-3"></div>
         </div>
+
     </div>
 
     {{-- Modal --}}
@@ -285,6 +287,36 @@
             };
 
             const chart = new ApexCharts(document.querySelector("#monthly-goals-line-chart"), chartOptions);
+            chart.render();
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const options = {
+                chart: {
+                    type: 'donut',
+                    height: 320,
+                },
+                series: [
+                    {{ $goals->where('completed', true)->count() }},
+                    {{ $goals->where('completed', false)->count() }}
+                ],
+                labels: ['Completed', 'Pending'],
+                colors: ['#10B981', '#FBBF24'],
+                legend: {
+                    labels: {
+                        colors: '#d1d5db'
+                    }
+                },
+                dataLabels: {
+                    style: {
+                        colors: ['#fff']
+                    }
+                }
+            };
+
+            const chart = new ApexCharts(document.querySelector("#donut-chart"), options);
             chart.render();
         });
     </script>
