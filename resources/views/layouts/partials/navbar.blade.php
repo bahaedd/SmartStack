@@ -27,8 +27,42 @@
             <button class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></button>
             <button class="text-gray-400 hover:text-white"><i class="fas fa-th"></i></button>
             <button class="text-gray-400 hover:text-white"><i class="fas fa-sun"></i></button>
-            <img src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" class="w-8 h-8 rounded-full"
-                alt="User Avatar" />
+            <!-- Profile Dropdown -->
+            <div class="relative">
+                <button id="user-menu-button" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom-end"
+                    class="flex text-sm bg-gray-800 rounded-full focus:ring-2 focus:ring-gray-600 dark:focus:ring-gray-600"
+                    type="button">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 rounded-full"
+                        src="{{ Auth::user()->profile_photo_url ?? 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' }}"
+                        alt="user photo">
+                </button>
+
+                <!-- Dropdown menu -->
+                <div id="user-dropdown"
+                    class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute right-0 mt-2">
+                    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                        <div>Hi, {{ Auth::user()->name }} !</div>
+                    </div>
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                        <li>
+                            <a href="{{ route('profile.edit') }}"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile
+                                Settings</a>
+                        </li>
+                    </ul>
+                    <div class="py-2">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </nav>

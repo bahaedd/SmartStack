@@ -5,7 +5,7 @@
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-white">Goal Tracker</h1>
             <button data-modal-target="create-goal-modal" data-modal-toggle="create-goal-modal"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mb-4">
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mb-4" title="New">
                 <i class="fa-solid fa-square-plus"></i>
             </button>
         </div>
@@ -48,6 +48,7 @@
                             <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Due Date</th>
                             <th class="px-4 py-3">Status</th>
+                            <th class="px-4 py-3">Millstones</th>
                             <th class="px-4 py-3 text-right">Actions</th>
                         </tr>
                     </thead>
@@ -66,6 +67,19 @@
                                                 title="Pending"></i></span>
                                     @endif
                                 </td>
+                                @foreach ($goal->milestones as $milestone)
+                                    <div class="p-2 bg-gray-800 rounded my-2 flex justify-between items-center">
+                                        <div>
+                                            <h3
+                                                class="font-bold {{ $milestone->completed ? 'text-green-400 line-through' : '' }}">
+                                                {{ $milestone->title }}
+                                            </h3>
+                                            <p class="text-gray-400">{{ $milestone->description }}</p>
+                                        </div>
+                                        <a href="{{ route('milestones.edit', $milestone) }}"
+                                            class="text-sm text-blue-400">Edit</a>
+                                    </div>
+                                @endforeach
                                 <td class="px-4 py-3 text-right space-x-2">
                                     <a href="{{ route('goals.edit', $goal) }}"
                                         class="inline-block text-sm text-white rounded" title="Edit">
@@ -123,7 +137,7 @@
 
                 <form action="{{ route('goals.store') }}" method="POST" class="p-6 space-y-4">
                     @csrf
-                    <h3 class="text-xl font-medium text-white">Create New Goal</h3>
+                    <h3 class="text-xl font-medium text-white">New Goal</h3>
 
                     <div>
                         <label for="title" class="block mb-2 text-sm font-medium text-white">Title</label>
@@ -138,6 +152,16 @@
                     </div>
 
                     <div>
+
+                        <label for="description"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                        <textarea id="description" rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="..."></textarea>
+
+                    </div>
+
+                    <div>
                         <label for="status" class="block mb-2 text-sm font-medium text-white">Status</label>
                         <select name="status" id="status" required
                             class="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -147,8 +171,9 @@
                     </div>
 
                     <div class="flex justify-end">
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                            Save Goal
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+                            title="Save">
+                            <i class="fa-solid fa-floppy-disk"></i>
                         </button>
                     </div>
                 </form>

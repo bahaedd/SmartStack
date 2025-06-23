@@ -16,4 +16,9 @@ class Goal extends Model
     ];
 
     protected $listeners = ['goalCreated' => '$refresh'];
+
+    public function milestones()
+    {
+        return $this->hasMany(Milestone::class);
+    }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\MilestoneController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,6 +12,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
     Route::resource('goals', GoalController::class);
+    Route::resource('goals.milestones', MilestoneController::class)->shallow();
 });
 
 Route::middleware('auth')->group(function () {
