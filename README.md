@@ -121,6 +121,6 @@ MIT License. See `LICENSE` file for details.
 
 ## 🙋 Contact
 
-Built with 💻 by [Bahaeddine].
+Built with 💻 by Bahaeddine.
 
-- Email: [sihassi.bahaeddine@gmail.com]
+- Email: sihassi.bahaeddine@gmail.com
