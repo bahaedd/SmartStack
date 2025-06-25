@@ -30,6 +30,7 @@
         @yield('content')
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     @yield('scripts')
     <livewire:scripts />
 </body>

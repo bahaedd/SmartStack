@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Milestone;
+use App\Models\Goal;
 
 class MilestoneController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Goal $goal)
     {
-        //
+        $milestones = $goal->milestones()->latest()->get();
+
+        return view('milestones.index', [
+            'goal' => $goal,
+            'milestones' => $milestones,
+        ]);
     }
 
     /**
@@ -36,7 +42,8 @@ class MilestoneController extends Controller
 
         $goal->milestones()->create($validated);
 
-        return redirect()->route('goals.show', $goal)->with('success', 'Milestone added.');
+        return redirect()->route('goals.milestones.index', $goal)
+        ->with('success', 'Milestone added successfully.');
     }
 
     /**

@@ -11,6 +11,10 @@ class Milestone extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'due_date' => 'datetime'
+    ];
+
     public function goal()
     {
         return $this->belongsTo(Goal::class);

@@ -48,7 +48,6 @@
                             <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Due Date</th>
                             <th class="px-4 py-3">Status</th>
-                            <th class="px-4 py-3">Millstones</th>
                             <th class="px-4 py-3 text-right">Actions</th>
                         </tr>
                     </thead>
@@ -67,20 +66,11 @@
                                                 title="Pending"></i></span>
                                     @endif
                                 </td>
-                                @foreach ($goal->milestones as $milestone)
-                                    <div class="p-2 bg-gray-800 rounded my-2 flex justify-between items-center">
-                                        <div>
-                                            <h3
-                                                class="font-bold {{ $milestone->completed ? 'text-green-400 line-through' : '' }}">
-                                                {{ $milestone->title }}
-                                            </h3>
-                                            <p class="text-gray-400">{{ $milestone->description }}</p>
-                                        </div>
-                                        <a href="{{ route('milestones.edit', $milestone) }}"
-                                            class="text-sm text-blue-400">Edit</a>
-                                    </div>
-                                @endforeach
                                 <td class="px-4 py-3 text-right space-x-2">
+                                    <a href="{{ route('goals.milestones.index', $goal) }}"
+                                        class="inline-block text-sm text-white rounded" title="Milestones">
+                                        <i class="fa-solid fa-list-check text-yellow-400"></i>
+                                    </a>
                                     <a href="{{ route('goals.edit', $goal) }}"
                                         class="inline-block text-sm text-white rounded" title="Edit">
                                         <i class="fas fa-edit text-violet-400"></i>
@@ -183,7 +173,6 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const options = {
@@ -315,7 +304,6 @@
             chart.render();
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const options = {
