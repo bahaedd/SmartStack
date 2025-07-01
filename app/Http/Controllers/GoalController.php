@@ -13,7 +13,7 @@ class GoalController extends Controller
      */
     public function index()
     {
-        $goals = Goal::latest()->paginate(10);
+        $goals = Goal::latest()->paginate(20);
 
         // Group completed goals by month
         $completed = Goal::where('completed', true)
@@ -100,8 +100,15 @@ class GoalController extends Controller
         ]);
 
         $goal->update($validated);
+
+        // ✅ If goal is marked as completed, update all related milestones
+        if ($goal->completed) {
+            $goal->milestones()->update(['completed' => true]);
+        }
+
         return redirect()->route('goals.index')->with('success', 'Goal updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.

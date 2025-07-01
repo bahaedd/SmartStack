@@ -15,10 +15,6 @@ class MilestoneController extends Controller
     {
         $milestones = $goal->milestones()->latest()->get();
 
-    /* This code snippet is returning a view called 'milestones.index' and passing an array of data to
-    that view. The array contains two key-value pairs: 'goal' with the value of the  variable
-    and 'milestones' with the value of the  variable. This data will be accessible in the
-    'milestones.index' view for displaying information related to the goal and its milestones. */
         return view('milestones.index', [
             'goal' => $goal,
             'milestones' => $milestones,
@@ -80,7 +76,8 @@ class MilestoneController extends Controller
 
         $milestone->update($validated);
 
-        return back()->with('success', 'Milestone updated.');
+        return redirect()->route('goals.milestones.index', $goal)
+        ->with('success', 'Milestone updated.');
     }
 
     /**

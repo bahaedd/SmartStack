@@ -25,6 +25,9 @@
     {{-- Sidebar --}}
     @include('layouts.partials.sidebar')
 
+    {{-- Flash Message --}}
+    @include('components.flash-message')
+
     {{-- Main Content --}}
     <main class="pt-16 sm:ml-56 transition-all duration-300 p-6">
         @yield('content')
@@ -33,6 +36,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     @yield('scripts')
     <livewire:scripts />
+
 </body>
 
 </html>

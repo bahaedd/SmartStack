@@ -1,19 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="mb-6 mt-6">
-        <div class="flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Milestones for: {{ $goal->title }}</h1>
-            <button data-modal-target="create-milestone-modal" data-modal-toggle="create-milestone-modal"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                <i class="fa-solid fa-plus"></i> Add Milestone
-            </button>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12">
         {{-- Milestones Table --}}
         <div>
+            <div class="mb-6">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold">Milestones for: {{ $goal->title }}</h1>
+                    <button data-modal-target="create-milestone-modal" data-modal-toggle="create-milestone-modal"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
             <div class="overflow-x-auto bg-gray-800 rounded-lg shadow">
                 <table class="min-w-full text-left text-sm">
                     <thead class="bg-gray-700 text-gray-300">
@@ -33,9 +32,11 @@
                                 </td>
                                 <td class="px-4 py-3">
                                     @if ($milestone->completed)
-                                        <span class="text-green-400 font-semibold">Completed</span>
+                                        <span class="text-green-400 font-semibold">
+                                            <i class="fa-solid fa-check-to-slot" title="Completed"></i></span>
                                     @else
-                                        <span class="text-yellow-400 font-semibold">Pending</span>
+                                        <span class="text-yellow-400 font-semibold"><i class="fa-solid fa-spinner"
+                                                title="Pending"></i></span>
                                     @endif
                                 </td>
                                 <td class="px-4 py-3 text-right space-x-2">
@@ -103,17 +104,15 @@
                     </div>
 
                     <div>
-                        <label for="completed" class="block text-sm font-medium text-white mb-1">Status</label>
-                        <select name="completed" id="completed"
-                            class="w-full px-3 py-2 rounded bg-gray-700 text-white border border-gray-600 focus:ring-blue-500">
-                            <option value="0">Pending</option>
-                            <option value="1">Completed</option>
-                        </select>
+                        <label for="description" class="block text-sm font-medium text-gray-200">Description</label>
+                        <textarea name="description" id="description" rows="4"
+                            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none"></textarea>
                     </div>
 
                     <div class="flex justify-end">
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                            Save
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+                            title="Save">
+                            <i class="fa-solid fa-floppy-disk"></i>
                         </button>
                     </div>
                 </form>
