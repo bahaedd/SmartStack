@@ -1,11 +1,17 @@
 <?php
 
 namespace App\Providers;
-
-use Illuminate\Support\ServiceProvider;
+use App\Models\Habit;
+use App\Policies\HabitPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+    protected $policies = [
+        Habit::class => HabitPolicy::class,
+    ];
+
     /**
      * Register any application services.
      */
@@ -19,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
     }
 }

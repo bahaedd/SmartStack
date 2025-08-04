@@ -41,7 +41,7 @@ class GoalController extends Controller
         $completedData = $allMonths->map(fn($month) => ['x' => $month, 'y' => $completed->get($month, 0)]);
         $pendingData = $allMonths->map(fn($month) => ['x' => $month, 'y' => $pending->get($month, 0)]);
 
-        return view('goals.index', [
+        return view('GoalTracker.goals.index', [
             'goals' => $goals,
             'completedData' => $completedData,
             'pendingData' => $pendingData,
@@ -53,7 +53,7 @@ class GoalController extends Controller
      */
     public function create()
     {
-        return view('goals.create');
+        return view('GoalTracker.goals.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class GoalController extends Controller
         ]);
 
         Goal::create($validated);
-        return redirect()->route('goals.index')->with('success', 'Goal created successfully.');
+        return redirect()->route('GoalTracker.goals.index')->with('success', 'Goal created successfully.');
     }
 
     /**
@@ -84,7 +84,7 @@ class GoalController extends Controller
      */
     public function edit(Goal $goal)
     {
-        return view('goals.edit', compact('goal'));
+        return view('GoalTracker.goals.edit', compact('goal'));
     }
 
     /**

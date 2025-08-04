@@ -16,7 +16,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center p-2 rounded-lg hover:bg-gray-700">
+                <a href="/habits" class="flex items-center p-2 rounded-lg hover:bg-gray-700">
                     <i class="fas fa-calendar text-yellow-600 w-5 h-5"></i>
                     <span class="ms-3 font-md font-semibold">Habit Builder</span>
                 </a>

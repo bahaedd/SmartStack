@@ -18,6 +18,7 @@
                     <thead class="bg-gray-700 text-gray-300">
                         <tr>
                             <th class="px-4 py-3">Title</th>
+                            <th class="px-4 py-3">Description</th>
                             <th class="px-4 py-3">Due Date</th>
                             <th class="px-4 py-3">Status</th>
                             <th class="px-4 py-3 text-right">Actions</th>
@@ -27,6 +28,7 @@
                         @forelse($milestones as $milestone)
                             <tr>
                                 <td class="px-4 py-3 font-medium">{{ $milestone->title }}</td>
+                                <td class="px-4 py-3">{{ $goal->description }}</td>
                                 <td class="px-4 py-3">
                                     {{ \Carbon\Carbon::parse($milestone->due_date)->format('Y-m-d') }}
                                 </td>
